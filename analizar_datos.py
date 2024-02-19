@@ -40,9 +40,8 @@ array_correlacion = matriz_correlacion[0].toArray()
 
 #imprimimos la matriz de correlación
 print("Matriz de correlación: ")
-sns.heatmap(array_correlacion, annot=True, fmt=".2f")
-plt.title('Matriz de correlación de las variables numéricas')
-plt.show()
+df_correlacion = pd.DataFrame(array_correlacion, columns=columnas_num, index=columnas_num)
+print(df_correlacion)
 
 #Cerramos la sesión de Spark
 spark.stop()
