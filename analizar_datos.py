@@ -30,7 +30,10 @@ print("Datos estadísticos: ")
 print(datos_pandas)
 
 #matriz de correlación de las variables numéricas
-assembler = VectorAssembler(inputCols=df.columns, outputCol="features")
+#seleccionamos las variables numéricas
+columnas_num = [c for c, tipo in df.dtypes if tipo != "string"]
+
+assembler = VectorAssembler(inputCols=columnas_num, outputCol="features")
 datos_transformados = assembler.transform(df).select("features")
 matriz_correlacion = Correlation.corr(datos_transformados, "features").head()
 array_correlacion = matriz_correlacion[0].toArray()
